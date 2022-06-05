@@ -52,11 +52,11 @@ def get_wm_path():
 
 # create a tkinter window
 root = Tk()
-root.geometry("+450+200")
+root.geometry("+600+200")
 root.minsize(400, 300)
 root.title("Watermarking App")
 
-imgframe = ttk.Frame(root, padding=10)
+imgframe = Canvas(root)
 imgframe.grid(column=0, row=0, rowspan=2, sticky=(N, S, E, W))
 
 bframe = ttk.Frame(root, padding=10)

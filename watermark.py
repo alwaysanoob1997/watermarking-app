@@ -8,11 +8,12 @@ PHOTO = None
 WATERMARK = None
 
 
+def drag(event):
+    event.widget.place(x=event.x_root, y=event.y_root,anchor=CENTER)
+
 # add file open functionality
 def get_img_path():
     path = fd.askopenfilename()
-    global img
-    global future_img
 
     global PHOTO
     PHOTO = path
@@ -21,15 +22,18 @@ def get_img_path():
     width, height = rawimg.size
     print(width, height)
 
+    global img
     rawimg.thumbnail((300,300), Image.Resampling.LANCZOS)
     img = ImageTk.PhotoImage(rawimg)
 
-
-    future_img.grid_forget()
-    future_img = ttk.Label(imgframe, image=img)
-    future_img.grid()
+    global future_img
+    global imgframe
+    # future_img.grid_forget()
+    # future_img = ttk.Label(imgframe, image=img)
+    # future_img.place()
+    future_img.config(image=img)
     future_img.update()
-
+    future_img.bind("<B1-Motion>", drag)
 
     print(future_img.winfo_geometry())
     ttk.Button(bframe, text="Open Watermark", command=get_wm_path).grid(column=1, row=1, sticky=E)

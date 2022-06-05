@@ -26,16 +26,13 @@ def get_img_path():
 
 
     future_img.grid_forget()
-    future_img = ttk.Label(frame, image=img)
-    future_img.grid(column=0, row=0, rowspan=2)
+    future_img = ttk.Label(imgframe, image=img)
+    future_img.grid()
     future_img.update()
 
-    # global wmframe
-    # wmframe = ttk.Frame(future_img)
-    # wmframe.grid(sticky=(N, S, E, W))
 
     print(future_img.winfo_geometry())
-    ttk.Button(frame, text="Open Watermark", command=get_wm_path).grid(column=1, row=1, sticky=E)
+    ttk.Button(bframe, text="Open Watermark", command=get_wm_path).grid(column=1, row=1, sticky=E)
 
 def get_wm_path():
     path = fd.askopenfilename()
@@ -59,15 +56,19 @@ root.geometry("+450+200")
 root.minsize(400, 300)
 root.title("Watermarking App")
 
-frame = ttk.Frame(root, padding=10)
-frame.grid(sticky=(N, S, E, W))
+imgframe = ttk.Frame(root, padding=10)
+imgframe.grid(column=0, row=0, rowspan=2, sticky=(N, S, E, W))
 
-future_img = ttk.Label(frame, text="Image Here")
+bframe = ttk.Frame(root, padding=10)
+bframe.grid(column=1, row=0, rowspan=2, sticky=(N, S, E, W))
+
+future_img = ttk.Label(imgframe, text="Image Here")
 future_img.grid(column=0, row=0, rowspan=2)
 
 
-ttk.Button(frame, text="Open Photo", command=get_img_path).grid(column=1, row=0, sticky=E)
-ttk.Button(frame, text="Open Watermark", state=DISABLED).grid(column=1, row=1, sticky=E)
+ttk.Button(bframe, text="Open Photo", command=get_img_path).grid(column=1, row=0, sticky=E)
+ttk.Button(bframe, text="Open Watermark", state=DISABLED).grid(column=1, row=1, sticky=E)
+
 
 # todo add functionality to superimpose 2nd image over first
 
@@ -76,12 +77,12 @@ ttk.Button(frame, text="Open Watermark", state=DISABLED).grid(column=1, row=1, s
 
 root.columnconfigure(0, weight=1)
 root.rowconfigure(0, weight=1)
-frame.columnconfigure(0, weight=2)
-frame.columnconfigure(1, weight=1)
+imgframe.columnconfigure(0, weight=2)
+imgframe.columnconfigure(1, weight=1)
 
 
-frame.rowconfigure(0, weight=1)
-frame.rowconfigure(1, weight=1)
+imgframe.rowconfigure(0, weight=1)
+imgframe.rowconfigure(1, weight=1)
 
 
 

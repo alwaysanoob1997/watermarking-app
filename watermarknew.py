@@ -3,6 +3,7 @@ from tkinter import *
 from tkinter import ttk
 from tkinter import filedialog as fd
 from PIL import Image, ImageTk
+from tkinter import messagebox
 
 PRIMARY_FILETYPES = [
     ('JPG Files', '*.jpg'),
@@ -250,6 +251,8 @@ class ImageManager():
 
             # save image
             fullphoto.save(newpath)
+
+        messagebox.showinfo(title="Image Saved", message=f"Image has been saved to {newpath}")
 
         # close the watermark image now
         self.wm_image.close()
